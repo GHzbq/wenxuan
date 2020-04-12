@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>测试markdown编辑器</title>
+	<!-- 引入Mditor样式文件 -->
+	<link rel="stylesheet" href="/static/dist/css/mditor.min.css">
+	<!-- 引入Mditor脚本文件 -->
+	<script src="/static/dist/js/mditor.min.js"></script>
+</head>
+<body>
+	<textarea name="editor" id="editor" >
+		```C++
+			#include <iostream>
+		```
+	</textarea>
+	<script>
+		// 创建Mditor实例
+		var mditor = Mditor.fromTextarea(document.getElementById('editor'))
+		mditor.on('ready', function () {
+			console.log('value=' ,mditor.value)
+		})
+		var parser = new mditor.Parser
+		var html = parser.parse(mditor.value)
+		console.log('html=', html)
+	</script>
+</body>
+</html>

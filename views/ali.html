@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=yes" />
+	<title>添加文章</title>
+	
+	<link href="../static/dist/css/mditor.min.css" rel="stylesheet">
+	
+	<style>
+		.hideInput{
+			width: 0;
+			height: 0;
+		}
+		.divTitle{
+			height: 45px;
+			width: 100%;
+			border: 1px solid #ccc;
+			border-radius: 3px 3px 0 0;
+			box-shadow: inset 0 1px 0 hsla(0,0%,100%,.4);
+			background-color: #f3f3f3;
+			position: absolute;
+			top: -46px;
+			color: #6a737d;
+			line-height: 45px;
+			min-width: 765px;
+		}
+
+		.clearFix::after{content:".";clear: both;display: block;height: 0;visibility: hidden;}
+		.back{
+			cursor: pointer;
+			float: left;
+			margin-left: 12px;
+		}
+		.fullscreen .titleInputDiv{
+			width: 80%;
+		}
+		.titleInputDiv{
+			float: left;
+			width: 60%;
+			position: relative;
+		}
+		.fontNum{
+			position: absolute;
+			right: 0;
+			top: 0;
+			font-size: 13px;
+			line-height: 50px;
+		}
+		.titleInput{
+			height: 30px;
+			width: 100%;
+			margin-left: 10px;
+			border-radius: 5px;
+			border: none;
+			text-indent: 8px;
+			color: #6a737d;
+			font-size: 13px;
+			box-sizing: border-box;
+    		padding-right: 70px;
+		}
+		.submitBtn{
+			float: left;
+		}
+		.saveBtn,.releaseBtn{
+			float: left;
+			margin-top: 10px;
+			width: 90px;
+			height: 28px;
+			border: 1px solid red;
+			margin-left: 25px;
+			border-radius: 3px;
+			text-align: center;
+			line-height: 25px;
+    		font-size: 13px;
+			cursor: pointer;
+		}
+		.saveBtn{
+			color: red;
+		}
+		.releaseBtn{
+			color: #fff;
+			background-color: red;
+		}
+		.fullscreen .saveBtn,.releaseBtn{
+			margin-left: 40px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div>
+		<textarea id="editor">## To be No.1
+[ **M** ] arkdown + E [ **ditor** ] = **Mditor**
+> just so so.
+> Always believe that something wonderful is about to happen.
+
+```C++
+#include "iostream"
+
+int main() {
+  std::cout << "Hello world!" << std::endl;
+  std::cout << "You change world, "
+            << "I protect you." << std::endl;
+
+  return 0;
+}
+```  </textarea>
+
+		<input type="file" accept="image/*" class="hideInput" onchange="getImg()">
+
+		<div class="divTitle clearFix">
+			<div class="back">
+					<span> < </span>
+					<span style="font-size: 13px;">文章管理</span>
+			</div>
+			<div class="titleInputDiv">
+				<input type="text" class="titleInput" maxlength="100" placeholder="Are you ok?" onkeyup="numCount()">
+				<div class="fontNum">0/100</div>
+			</div>
+			<div class="submitBtn clearFix">
+				<div class="saveBtn" onclick="saveData()">保存草稿</div>
+				<div class="releaseBtn">发布文章</div>
+			</div>
+		</div>
+	</div>
+
+	
+	<script src="../static/dist/js/mditor.min.js"></script>
+	
+	<script>
+		window.onresize = function(){
+			changeSize();
+		}
+		var textarea = document.getElementById('editor');
+		var mditor = Mditor.fromTextarea(textarea);
+		mditor.on('ready',function(){
+			setTimeout(() => {
+				changeSize();
+			}, 10);
+			mditor.fullscreen = true
+			// console.log('mditor', mditor);
+			// console.log('toolbar', mditor.toolbar);
+			mditor.on('changed', function(){
+				//console.log('changed',mditor.value);
+			});
+			mditor.editor.on('drop',function(event){
+				// console.log('drop',event);
+			});
+			mditor.editor.on('paste',function(event){
+				// console.log('paste',event.clipboardData.types);
+			});
+			mditor.on('head-dblclick',function(){
+				// console.log('head-dblclick');
+			});
+			mditor.toolbar.items[12].handler = null
+			document.querySelector(".fa-image").onclick = function(){
+				document.querySelector(".hideInput").click()
+			}
+			document.querySelector(".head").insertBefore(document.querySelector(".divTitle"),document.querySelector(".toolbar"));
+			var iconDom = document.querySelectorAll(".item.fa");
+			for (var i = 0; i < iconDom.length; i++) {
+				var divDom = document.createElement("div");
+				divDom.className = "iconFont";
+				var iHtml = iconDom[i].getAttribute("title").split(" ")[0];
+				divDom.innerHTML = iHtml;
+				iconDom[i].appendChild(divDom);
+			}
+		});
+		function numCount(){
+			document.querySelector(".fontNum").innerHTML = document.querySelector(".titleInput").value.length + "/100"
+		}
+		function saveData(){
+			// console.log("往后台发送数据");
+		}
+		function changeSize(){
+			if(window.innerWidth > 1720){
+				document.querySelector(".fullscreen .titleInputDiv").style.width = "80%";
+			}else if(window.innerWidth <= 1720 && window.innerWidth > 1370){
+				document.querySelector(".fullscreen .titleInputDiv").style.width = "75%";
+			}else if(window.innerWidth <= 1370 && window.innerWidth > 1140){
+				document.querySelector(".fullscreen .titleInputDiv").style.width = "70%";
+			}else if(window.innerWidth <= 1140 && window.innerWidth > 980){
+				document.querySelector(".fullscreen .titleInputDiv").style.width = "62%";
+			}else if(window.innerWidth <= 980){
+				document.querySelector(".fullscreen .titleInputDiv").style.width = "55%";
+			}
+		}
+		function getImg(){
+			var reader = new FileReader();
+			var file = document.querySelector(".hideInput").files[0];
+			if(file)reader.readAsDataURL(file);
+			reader.addEventListener("load",function() {
+				sendImg(reader.result,file);
+			},false);
+		}
+		function sendImg(base64,file){
+			var picname;
+			if (file.type.split("/")[1] == "jpeg") {
+                picname = new Date().getTime().toString() + ".jpg";
+            } else {
+                picname = new Date().getTime().toString() + "." + file.type.split("/")[1];
+			}
+			//发ajax
+			var url = "/upload_picture";
+			var data = 'picture_name=' + '"' + base64 + '"';
+			var xhr = new XMLHttpRequest();
+			xhr.open('POST',url,false);
+			// 添加http头，发送信息至服务器时内容编码类型
+			xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+			xhr.onreadystatechange=function(){
+				if (xhr.readyState == 4){
+					if (xhr.status == 200 || xhr.status == 304){
+						mditor.editor.wrapSelectText('![alt]('+xhr.responseText, ')');
+					}
+				}
+			}
+			xhr.send(data);
+		}
+	</script>
+</body>
+
+</html>

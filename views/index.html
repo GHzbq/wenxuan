@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="Dashboard">
   <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-  <title>文轩</title>
+  <title> 文 轩 </title>
 
   <!-- Favicons -->
   <link href="/static/img/favicon.png" rel="icon">
@@ -55,19 +55,19 @@
               <p class="green">You have {{.PendingTaskCount}} pending tasks</p>
             </li>
             {{range .PendingTasks}}
-            <li>
-              <a href="/pending_task?id={{.Index}}">
-                <div class="task-info">
-                  <div class="desc"> {{.Descript}} </div>
-                  <div class="percent"> {{.Percent}}% </div>
-                </div>
-                <div class="progress progress-striped">
-                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{.Percent}}" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                    <span class="sr-only"> {{.Percent}}% Complete (success)</span>
+              <li>
+                <a href="/pending_task?id={{.Index}}">
+                  <div class="task-info">
+                    <div class="desc"> {{.Descript}} </div>
+                    <div class="percent"> {{.Percent}}% </div>
                   </div>
-                </div>
-              </a>
-            </li>
+                  <div class="progress progress-striped">
+                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{.Percent}}" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                      <span class="sr-only"> {{.Percent}}% Complete (success)</span>
+                    </div>
+                  </div>
+                </a>
+              </li>
             {{end}}
             <li class="external">
               <a href="/all_pending_task">See All Tasks</a>
@@ -87,18 +87,18 @@
               <p class="green">You have {{.NewMessageCount}} new messages</p>
             </li>
             {{range .messages}}
-            <li>
-              <a href="/message?id={{.MessageIndex}}">
-                <span class="photo"><img alt="avatar" src="{{.FromImageSrc}}"></span>
-                <span class="subject">
+              <li>
+                <a href="/message?id={{.MessageIndex}}">
+                  <span class="photo"><img alt="avatar" src="{{.FromImageSrc}}"></span>
+                  <span class="subject">
                   <span class="from"> {{.FromName}} </span>
                   <span class="time"> {{.FromTime}} </span>
                   </span>
-                <span class="message">
+                  <span class="message">
                   {{.MessageInfo}}
                 </span>
-              </a>
-            </li>
+                </a>
+              </li>
             {{end}}
             <li>
               <a href="/all_message">See all messages</a>
@@ -118,13 +118,13 @@
               <p class="yellow">You have {{.NotificationCount}} new notifications</p>
             </li>
             {{range .notifications}}
-            <li>
-              <a href="/notification?id={{.NotificationIndex}}">
-                <span class="label {{.LabelLevel}}"><i class="fa fa-bolt"></i></span>
-                {{.NotificationInfo}}
-                <span class="small italic">{{.NotificationTime}}</span>
-              </a>
-            </li>
+              <li>
+                <a href="/notification?id={{.NotificationIndex}}">
+                  <span class="label {{.LabelLevel}}"><i class="fa fa-bolt"></i></span>
+                  {{.NotificationInfo}}
+                  <span class="small italic">{{.NotificationTime}}</span>
+                </a>
+              </li>
             {{end}}
             <li>
               <a href="/all_notification">See all notifications</a>
@@ -158,6 +158,12 @@
             <span>首页</span>
           </a>
         </li>
+        <li class="mt">
+          <a class="active" href="/add_article">
+            <i class="fa fa-desktop"></i>
+            <span>添加文章</span>
+          </a>
+        </li>
       </ul>
       <!-- sidebar menu end-->
     </div>
@@ -171,42 +177,77 @@
     <section class="wrapper">
       <div class="row">
         <div class="col-lg-9 main-chart">
-          <div class="col-md-12 mt">
-            <div class="content-panel">
-              <table class="table table-hover" >
-                <h4><i class="fa fa-angle-right"></i> 历史文章 </h4>
-                <hr>
-                <thead >
-                <tr>
-                  <th style="width:300px" class="text-center">文章标题</th>
-                  <th style="width:100px" class="text-center">文章内容</th>
-                  <th style="width:100px" class="text-center">发布时间</th>
-                  <th style="width:100px" class="text-center">浏览次数</th>
-                  <th style="width:80px" class="text-center">编辑</th>
-                  <th style="width:80px" class="text-center">删除</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{range .articles}}
-                  <tr >
-                    <td class="text-center">{{.ArticleTitle}}</td>
-                    <td class="text-center"><a href="/article?id={{.ArticleIndex}}">查看详情</a></td>
-                    <td class="text-center">{{.CreationTime.Format "2006-01-02"}}</td>
-                    <td class="text-center">{{.ViewCount}}</td>
-                    <td class="text-center"><a href="/edit_article?id={{.ArticleIndex}}">编辑</a></td>
-                    <td class="text-center"><a href="/delete_article?id={{.ArticleIndex}}">删除</a></td>
-                  </tr>
-                {{end}}
-                </tbody>
-              </table>
-            </div>
+          <!--CUSTOM CHART START -->
+          <div class="border-head">
+            <h4><strong>历史文章</strong></h4>
           </div>
-
+          <div class="custom-bar-chart">
+            <table class="table table-hover" >
+              <thead >
+              <tr>
+                <th style="width:200px" class="text-center">文章标题</th>
+                <th style="width:100px" class="text-center">文章内容</th>
+                <th style="width:100px" class="text-center">发布时间</th>
+                <th style="width:100px" class="text-center">浏览次数</th>
+                <th style="width:80px" class="text-center">编辑</th>
+                <th style="width:80px" class="text-center">删除</th>
+              </tr>
+              </thead>
+              <tbody>
+              {{range .articles}}
+                <tr >
+                  <td class="text-center">{{.ArticleTitle}}</td>
+                  <td class="text-center"><a href="/article?id={{.ArticleIndex}}">查看详情</a></td>
+                  <td class="text-center">{{.CreationTime.Format "2006-01-02"}}</td>
+                  <td class="text-center">{{.ViewCount}}</td>
+                  <td class="text-center"><a href="/edit_article?id={{.ArticleIndex}}">编辑</a></td>
+                  <td class="text-center"><a href="/delete_article?id={{.ArticleIndex}}">删除</a></td>
+                </tr>
+              {{end}}
+              </tbody>
+            </table>
+          </div>
+          <!--custom chart end-->
         </div>
+        <!-- /col-lg-9 END SECTION MIDDLE -->
         <!-- **********************************************************************************************************************************************************
             RIGHT SIDEBAR CONTENT
             *********************************************************************************************************************************************************** -->
         <div class="col-lg-3 ds">
+
+          <!-- RECENT ACTIVITIES SECTION -->
+          <h4 class="centered mt">最新活动</h4>
+          {{range .recentActivity}}
+          <div class="desc">
+            <div class="thumb">
+              <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
+            </div>
+            <div class="details">
+              <p>
+                <muted>{{.ActivityTime}}</muted>
+                <br/>
+                <a href="/activity_desc?id={{.ActivityID}}">{{.AcitivityPostUser.UserName}}</a> {{.ActivityDesc}}<br/>
+              </p>
+            </div>
+          </div>
+          {{end}}
+
+          <!-- USERS ONLINE SECTION -->
+          <h4 class="centered mt">在线成员</h4>
+          {{range .membersOnline}}
+          <div class="desc">
+            <div class="thumb">
+              <img class="img-circle" src="{{.MemberImg}}" width="35px" height="35px" align="">
+            </div>
+            <div class="details">
+              <p>
+                <a href="/memberProfile?id={{.MemberID}}">{{.MemberName}}</a><br/>
+                <muted>{{.MemberStatus}}</muted>
+              </p>
+            </div>
+          </div>
+          {{end}}
+
           <!-- CALENDAR-->
           <div id="calendar" class="mb">
             <div class="panel green-panel no-margin">
@@ -227,6 +268,7 @@
       <!-- /row -->
     </section>
   </section>
+
   <!--main content end-->
   <!--footer start-->
   <footer class="site-footer">
@@ -261,20 +303,20 @@
 <script src="/static/lib/zabuto_calendar.js"></script>
 <script type="text/javascript">
   $(document).ready(function() {
-    // var unique_id = $.gritter.add({
-    //   // (string | mandatory) the heading of the notification
-    //   title: 'Welcome to Dashio!',
-    //   // (string | mandatory) the text inside the notification
-    //   text: 'Hover me to enable the Close Button. You can hide the left sidebar clicking on the button next to the logo.',
-    //   // (string | optional) the image to display on the left
-    //   image: '/static/img/ui-sam.jpg',
-    //   // (bool | optional) if you want it to fade out on its own or just sit there
-    //   sticky: false,
-    //   // (int | optional) the time you want it to be alive for before fading out
-    //   time: 8000,
-    //   // (string | optional) the class name you want to apply to that specific message
-    //   class_name: 'my-sticky-class'
-    // });
+    var unique_id = $.gritter.add({
+      // (string | mandatory) the heading of the notification
+      title: 'Welcome to Dashio!',
+      // (string | mandatory) the text inside the notification
+      text: 'Hover me to enable the Close Button. You can hide the left sidebar clicking on the button next to the logo.',
+      // (string | optional) the image to display on the left
+      image: '/static/img/ui-sam.jpg',
+      // (bool | optional) if you want it to fade out on its own or just sit there
+      sticky: false,
+      // (int | optional) the time you want it to be alive for before fading out
+      time: 8000,
+      // (string | optional) the class name you want to apply to that specific message
+      class_name: 'my-sticky-class'
+    });
 
     return false;
   });
@@ -297,10 +339,10 @@
       action_nav: function() {
         return myNavFunction(this.id);
       },
-      ajax: {
-        url: "show_data.php?action=1",
-        modal: true
-      },
+      // ajax: {
+      //   url: "show_data.php?action=1",
+      //   modal: true
+      // },
       legend: [{
         type: "text",
         label: "Special event",
