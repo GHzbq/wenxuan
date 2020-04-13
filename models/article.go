@@ -11,10 +11,10 @@ import (
 type Article struct {
 	ArticleIndex 	int64 		`orm:"pk;auto"`
 	ArticleTitle 	string 		`orm:"size(20)"`
-	ArticleMark     string      `orm:"size(2048)"`
-	ArticleContent 	string 		`orm:"size(1024)"`
+	ArticleMark     string      `orm:"size(10240)"`
+	ArticleContent 	string 		`orm:"size(10240)"`
 	CreationTime 	time.Time 	`orm:"auto_now_add;type(datetime)"` // YYYY-MM-DD HH:MM:SS
-	ModifyTime   	time.Time 	`orm:"auto_now;type(date)"`         // YYYY-MM-DD
+	ModifyTime   	time.Time 	`orm:"auto_now;type(datetime)"`         // YYYY-MM-DD
 	ViewCount    	int32     	`orm:"default(0)"`
 }
 

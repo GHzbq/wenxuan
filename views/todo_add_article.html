@@ -273,7 +273,7 @@
                             </div>
                             <div class="submitBtn clearFix">
                                 <div class="saveBtn" onclick="saveData()">保存草稿</div>
-                                <div class="releaseBtn">发布文章</div>
+                                <div class="releaseBtn" onclick="publishArticle()">发布文章</div>
                             </div>
                         </div>
                         <div class="divEditor">
@@ -355,27 +355,52 @@ int main() {
                             console.log('html=', html);
                             // 发ajax
                             $.ajax( {type : "POST",
-                                url : 'http://127.0.0.1:8080/add_article',
+                                url : '/add_article',
                                 contentType:"application/json",
                                 dataType: "JSON",
                                 data : JSON.stringify({"article_title": article_title,"article_mark": mditor.value,"article_content": html}),
                                 success : function(data, status){//格式{key:value}
-                                    // alert(data);
-                                    // alert(data[0].name)
-                                    var resp = eval(data)
-                                    if (status == 200 && resp[0].errno === 0) {
-                                        // 成功
-                                        alert("保存成功")
-                                        location.href("/index")
-                                    } else {
-                                        alert(resp[0].errorMsg)
-                                        return false
-                                    }
+                                    alert("保存成功")
                                 },
-                                error: function (data) {
-                                console.log("出现错误，data=", data)
-                                    alert(data)
-                                    alert("出现错误")
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    /*弹出jqXHR对象的信息*/
+                                    alert(jqXHR.responseText); // 服务器响应返回的文本信息
+                                    // alert(jqXHR.status); // 返回的HTTP状态码
+                                    // alert(jqXHR.readyState); // 当前状态,0-未初始化，1-正在载入，2-已经载入，3-数据进行交互，4-完成。
+                                    // alert(jqXHR.statusText); // 状态码对应的错误信息
+                                    // /*弹出其他两个参数的信息*/
+                                    // alert(textStatus); //返回的是字符串类型，表示返回的状态
+                                    // alert(errorThrown); // 字符串类型，表示服务器抛出返回的错误信息
+                                }
+                            });
+                        }
+                        function publishArticle() {
+                            // console.log("往后台发送数据");
+                            var article_title = document.getElementById('article_title').value;
+                            // console.log('article_title=', article_title);
+                            var mditor = Mditor.fromTextarea(document.getElementById('editor'));
+                            var parser = new mditor.Parser();
+                            var html = parser.parse(mditor.value);
+                            // console.log('html=', html);
+                            // 发ajax
+                            $.ajax( {type : "POST",
+                                url : '/add_article',
+                                contentType:"application/json",
+                                dataType: "JSON",
+                                data : JSON.stringify({"article_title": article_title,"article_mark": mditor.value,"article_content": html}),
+                                success : function(data, status){//格式{key:value}
+                                    alert("成功发布")
+                                    parent.location.href='/index'
+                                },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    /*弹出jqXHR对象的信息*/
+                                    alert(jqXHR.responseText); // 服务器响应返回的文本信息
+                                    // alert(jqXHR.status); // 返回的HTTP状态码
+                                    // alert(jqXHR.readyState); // 当前状态,0-未初始化，1-正在载入，2-已经载入，3-数据进行交互，4-完成。
+                                    // alert(jqXHR.statusText); // 状态码对应的错误信息
+                                    // /*弹出其他两个参数的信息*/
+                                    // alert(textStatus); //返回的是字符串类型，表示返回的状态
+                                    // alert(errorThrown); // 字符串类型，表示服务器抛出返回的错误信息
                                 }
                             });
                         }
@@ -433,7 +458,7 @@ int main() {
                 <div class="col-lg-3 ds">
 
                     <!-- RECENT ACTIVITIES SECTION -->
-                    <h4 class="centered mt">欢迎您</h4>
+                    <h4 class="centered mt">欢迎来到创作中心</h4>
 
                     <!-- CALENDAR-->
                     <div id="calendar" class="mb">

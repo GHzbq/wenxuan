@@ -2,12 +2,12 @@ package main
 
 import (
 	"github.com/astaxie/beego"
-	"wenxuan/log"
 	_ "wenxuan/routers"
+	"wenxuan/utils"
 )
 
 func main() {
-	_ = log.Init("conf/log.json")
+	_ = utils.Init("conf/log.json")
 	beego.Run()
 }
 

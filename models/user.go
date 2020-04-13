@@ -8,7 +8,7 @@ import (
 
 // UserData 用户信息
 type UserData struct {
-	ID       int64
+	ID       int64  `orm:"column(id)"`
 	UserName string
 	Password string
 	Email    string

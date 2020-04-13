@@ -1,4 +1,4 @@
-package log
+package utils
 
 import (
 	"fmt"
@@ -45,7 +45,7 @@ func Init(filename string) (e error) {
 	newConfig()
 
 	if filename == "" {
-		filename = "./conf/log.json"
+		filename = "../conf/log.json"
 	}
 
 	e = LoadJsonToObject(filename, &cfg)

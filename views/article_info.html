@@ -27,15 +27,15 @@
     <link rel="stylesheet" href="/static/dist/css/mditor.min.css" />
     <script src="/static/dist/js/mditor.min.js"></script>
     <script src="/static/lib/jquery/jquery.min.js"></script>
-    <script>
-        var mditor = Mditor.fromTextarea(document.getElementById('article_mark_source'));
-        var parser = new mditor.Parser();
-        console.log('value=', mditor.value)
-        var html = parser.parse(mditor.value);
-        console.log("html=", html)
-        // document.getElementById('AfterParse').innerHTML = "hello";
-        $('result_content').after(html)
-    </script>
+{{/*    <script>*/}}
+{{/*        var mditor = Mditor.fromTextarea(document.getElementById('article_mark_source'));*/}}
+{{/*        var parser = new mditor.Parser();*/}}
+{{/*        console.log('value=', mditor.value)*/}}
+{{/*        var html = parser.parse(mditor.value);*/}}
+{{/*        console.log("html=", html)*/}}
+{{/*        document.getElementById('AfterParse').innerHTML = "hello";*/}}
+{{/*        // $('result_content').after(html)*/}}
+{{/*    </script>*/}}
 </head>
 
 <body>
@@ -49,7 +49,7 @@
             <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
         </div>
         <!--logo start-->
-        <a href="/static/index.html" class="logo"><b>文轩</b></a>
+        <a href="/index" class="logo"><b>文轩</b></a>
         <!--logo end-->
         <div class="nav notify-row" id="top_menu">
             <!--  notification start -->
@@ -169,110 +169,6 @@
                         <span>首页</span>
                     </a>
                 </li>
-                <!--
-                <li class="sub-menu">
-                  <a href="#">
-                    <i class="fa fa-desktop"></i>
-                    <span>UI Elements</span>
-                  </a>
-                  <ul class="sub">
-                    <li><a href="/static/general.html">General</a></li>
-                    <li><a href="/static/buttons.html">Buttons</a></li>
-                    <li><a href="/static/panels.html">Panels</a></li>
-                    <li><a href="/static/font_awesome.html">Font Awesome</a></li>
-                  </ul>
-                </li>
-                <li class="sub-menu">
-                  <a href="/static/javascript:;">
-                    <i class="fa fa-cogs"></i>
-                    <span>Components</span>
-                  </a>
-                  <ul class="sub">
-                    <li><a href="/static/grids.html">Grids</a></li>
-                    <li><a href="/static/calendar.html">Calendar</a></li>
-                    <li><a href="/static/gallery.html">Gallery</a></li>
-                    <li><a href="/static/todo_list.html">Todo List</a></li>
-                    <li><a href="/static/dropzone.html">Dropzone File Upload</a></li>
-                    <li><a href="/static/inline_editor.html">Inline Editor</a></li>
-                    <li><a href="/static/file_upload.html">Multiple File Upload</a></li>
-                  </ul>
-                </li>
-                <li class="sub-menu">
-                  <a href="/static/javascript:;">
-                    <i class="fa fa-book"></i>
-                    <span>Extra Pages</span>
-                  </a>
-                  <ul class="sub">
-                    <li><a href="/static/blank.html">Blank Page</a></li>
-                    <li><a href="/static/login.html">Login</a></li>
-                    <li><a href="/static/lock_screen.html">Lock Screen</a></li>
-                    <li><a href="/static/profile.html">Profile</a></li>
-                    <li><a href="/static/invoice.html">Invoice</a></li>
-                    <li><a href="/static/pricing_table.html">Pricing Table</a></li>
-                    <li><a href="/static/faq.html">FAQ</a></li>
-                    <li><a href="/static/404.html">404 Error</a></li>
-                    <li><a href="/static/500.html">500 Error</a></li>
-                  </ul>
-                </li>
-                <li class="sub-menu">
-                  <a href="/static/javascript:;">
-                    <i class="fa fa-tasks"></i>
-                    <span>Forms</span>
-                  </a>
-                  <ul class="sub">
-                    <li><a href="/static/form_component.html">Form Components</a></li>
-                    <li><a href="/static/advanced_form_components.html">Advanced Components</a></li>
-                    <li><a href="/static/form_validation.html">Form Validation</a></li>
-                    <li><a href="/static/contactform.html">Contact Form</a></li>
-                  </ul>
-                </li>
-                <li class="sub-menu">
-                  <a href="/static/javascript:;">
-                    <i class="fa fa-th"></i>
-                    <span>Data Tables</span>
-                  </a>
-                  <ul class="sub">
-                    <li><a href="/static/basic_table.html">Basic Table</a></li>
-                    <li><a href="/static/responsive_table.html">Responsive Table</a></li>
-                    <li><a href="/static/advanced_table.html">Advanced Table</a></li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="/static/inbox.html">
-                    <i class="fa fa-envelope"></i>
-                    <span>Mail </span>
-                    <span class="label label-theme pull-right mail-info">2</span>
-                  </a>
-                </li>
-                <li class="sub-menu">
-                  <a href="/static/javascript:;">
-                    <i class=" fa fa-bar-chart-o"></i>
-                    <span>Charts</span>
-                  </a>
-                  <ul class="sub">
-                    <li><a href="/static/morris.html">Morris</a></li>
-                    <li><a href="/static/chartjs.html">Chartjs</a></li>
-                    <li><a href="/static/flot_chart.html">Flot Charts</a></li>
-                    <li><a href="/static/xchart.html">xChart</a></li>
-                  </ul>
-                </li>
-                <li class="sub-menu">
-                  <a href="/static/javascript:;">
-                    <i class="fa fa-comments-o"></i>
-                    <span>Chat Room</span>
-                  </a>
-                  <ul class="sub">
-                    <li><a href="/static/lobby.html">Lobby</a></li>
-                    <li><a href="/static/chat_room.html"> Chat Room</a></li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="/static/google_maps.html">
-                    <i class="fa fa-map-marker"></i>
-                    <span>Google Maps </span>
-                  </a>
-                </li>
-                -->
             </ul>
             <!-- sidebar menu end-->
         </div>
@@ -299,10 +195,24 @@
                                 <textarea id="article_mark_source">{{.article.ArticleMark}}</textarea>
                             </div>
 
-                            <div class="markdown-body" id="AfterParse">
-                                <!--这里是解析后的内容-->
-                                <p id="result_content"></p>
+                            <div class="markdown_body" id="AfterParse">
+{{/*                                {{.article.ArticleContent}}*/}}
                             </div>
+
+                            <script>
+                                var mditor = Mditor.fromTextarea(document.getElementById('article_mark_source'));
+                                var parser = new mditor.Parser();
+                                console.log('value=', mditor.value)
+                                var html = parser.parse(mditor.value);
+                                console.log("html=", html)
+                                document.getElementById('AfterParse').innerHTML = html;
+                                // $('result_content').after(html)
+                            </script>
+
+{{/*                            <div class="markdown-body" id="AfterParse">*/}}
+{{/*                                <!--这里是解析后的内容-->*/}}
+{{/*                                <p id="result_content"></p>*/}}
+{{/*                            </div>*/}}
                         </div>
                     </div>
                 </div>
