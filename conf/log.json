@@ -6,7 +6,7 @@
   "Adapters":[
     {
       "Name":"file",
-      "FileName" : "/home/work/log/wenxuan/server.log",
+      "FileName" : "/home/zhangbaqing/all/log/wenxuan/server.log",
       "Level": 7,
       "MaxLines" : 0,
       "MaxSize" : 0,
